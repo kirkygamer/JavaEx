@@ -1,0 +1,15 @@
+public class HelloWorld
+{
+
+	public static void main(String[] args)
+	{
+		;String MyString = "Hello World!";
+		System.out.println(printVar());
+	}
+	
+	public void printVar (String inputString)
+	{
+		inputString = "Hello World 2";
+	}
+
+}

@@ -1,0 +1,39 @@
+public class HelloWorld
+{
+
+	public static void main(String[] args)
+	{
+		// Hello World
+		System.out.println("Hello World!");
+		
+		// Assignment
+		String MyString = "Hello World 2!";
+		System.out.println(MyString);
+		
+		// Parameters
+		printVar("Hello World 3!");
+		
+		// Return Types
+		printRet();
+		
+		//Parameters/Operators
+		System.out.println(addNumbers(1,2));
+		
+	}
+	
+	static public void printVar (String inputString)
+	{
+		System.out.println(inputString);
+	}
+	
+	static public void printRet()
+	{
+		System.out.println("Hello World 4!");
+	}
+	
+	static public int addNumbers(int number1, int number2)
+	{
+		return number1 + number2;
+	}
+
+}
