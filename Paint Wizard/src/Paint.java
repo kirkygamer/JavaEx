@@ -13,4 +13,11 @@ public class Paint
 		this.coverage = coverage;
 		this.price = price;
 	}
+	
+	public int tinCoverage()
+	{
+		int tinCoverage = this.volume * this.coverage;
+		
+		return tinCoverage;
+	}
 }

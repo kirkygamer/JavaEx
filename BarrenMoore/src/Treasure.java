@@ -20,19 +20,23 @@ public class Treasure
 		switch ((int)randomNum)
 		{
 		case 0 :
-			treasureName = "large wooden chest";
+			//treasureName = "large wooden chest";
+			treasureName = "ham and cheese toastie";
 			break;
 		case 1 :
-			treasureName = "silver pocket watch";
+			//treasureName = "silver pocket watch";
+			treasureName = "ham and cheese toastie";
 			break;
 		case 2 :
-			treasureName = "golden chalice";
+			//treasureName = "golden chalice";
+			treasureName = "ham and cheese toastie";
 			break;
 		case 3 :
 			treasureName = "ham and cheese toastie";
 			break;
 		case 4 :
-			treasureName = "gaming PC";
+			//treasureName = "gaming PC";
+			treasureName = "ham and cheese toastie";
 			break;
 		default :
 			treasureName = "Excalibur";

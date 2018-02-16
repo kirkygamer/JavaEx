@@ -18,51 +18,43 @@ public class Wizard
 		{
 			System.out.print("Please enter a positive integer: " + exception);
 		}
-		calculateWastePrice(input);
+		//calculateWastePrice(input);
+		calculateWastePrice(input, paintC);
 		
 		scanner.close();
 	}
 	
-	public static void calculateWaste(int reqVolume)
-	{
-		
-	}
 	
 	public static void calculateWastePrice(int reqVolume)
 	{
 		double[] numTins = new double[3];
-		numTins[0] = Math.ceil((double)input / tinCoverage(paintC.volume, paintC.coverage));
-		numTins[1] = Math.ceil((double)input / tinCoverage(paintA.volume, paintA.coverage));
-		numTins[2] = Math.ceil((double)input / tinCoverage(paintD.volume, paintD.coverage));
-		
-		System.out.println("The cost of painting " + input + "m^2 is: ");
-		System.out.println("£" + (numTins[0]*paintC.price) + " with " + paintC.brand);
-		System.out.println("£" + (numTins[1]*paintA.price) + " with " + paintA.brand);
-		System.out.println("£" + (numTins[2]*paintD.price) + " with " + paintD.brand);
+		numTins[0] = Math.ceil((double)input / paintC.tinCoverage());
+		numTins[1] = Math.ceil((double)input / paintA.tinCoverage());
+		numTins[2] = Math.ceil((double)input / paintD.tinCoverage());
 		
 		double[] wastedPaint = new double[3];
-		wastedPaint[0] = (tinCoverage(paintC.coverage, paintC.coverage) * numTins[0]) - (double)input;
-		wastedPaint[0] /= paintC.coverage;
+		wastedPaint[0] = ((paintC.tinCoverage() * numTins[0]) - (double)input) / paintC.coverage;
+		wastedPaint[1] = ((paintA.tinCoverage() * numTins[1]) - (double)input) / paintA.coverage;
+		wastedPaint[2] = ((paintD.tinCoverage() * numTins[2]) - (double)input) / paintD.coverage;
 		
-		System.out.println("calc: " + wastedPaint[0]);
-		wastedPaint[1] = Math.ceil((double)input / tinCoverage(paintA.volume, paintA.coverage));
-		System.out.println("calc: " + (input / paintA.coverage));
-		wastedPaint[1] -= (input / paintA.coverage);
-		wastedPaint[2] = Math.ceil((double)input / tinCoverage(paintD.volume, paintD.coverage));
-		System.out.println("calc: " + (input / paintD.coverage));
-		wastedPaint[2] -= (input / paintD.coverage);
-		
-		System.out.println("wasted: " + wastedPaint[0] + ", " + wastedPaint[1] + ", " + wastedPaint[2]);
-		
-		
+		System.out.println("The cost of painting " + input + "m^2 is: ");
+		System.out.print("£" + (numTins[0]*paintC.price) + " with " + paintC.brand);
+		System.out.println(", wasting " + wastedPaint[0] + " litres");
+		System.out.print("£" + (numTins[1]*paintA.price) + " with " + paintA.brand);
+		System.out.println(", wasting " + wastedPaint[1] + " litres");
+		System.out.print("£" + (numTins[2]*paintD.price) + " with " + paintD.brand);
+		System.out.println(", wasting " + wastedPaint[2] + " litres");
 	}
 	
-	public static int tinCoverage(int tinVolume, int tinCoverage)
+	public static void calculateWastePrice(int reqVolume, Paint paint)
 	{
-		int coverage = tinVolume * tinCoverage;
+		double numberTins = Math.ceil((double)reqVolume / paint.tinCoverage());
+		double wastedPaintAmount = (paint.tinCoverage() * numberTins - (double)reqVolume) / paint.coverage;
 		
-		return coverage;
+		System.out.print("\nThe cost of painting " + reqVolume + "m^2 is with " + paint.brand);
+		System.out.println(" is " + (numberTins*paint.price));
+		System.out.println("This would waste " + wastedPaintAmount + " litres of paint.");
+		System.out.printf("This would waste %.2f litres of paint.", wastedPaintAmount);
 	}
-	
 	
 }

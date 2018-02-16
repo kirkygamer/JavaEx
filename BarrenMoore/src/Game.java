@@ -13,20 +13,13 @@ public class Game
 	
 	public static void main(String[] args)
 	{
-		//drawMenu();
-		//createTreasure(3);
-
+		drawMenu();
 		Treasure t1 = new Treasure((int)Math.floor(Math.random() * mapSize),
 								   (int)Math.floor(Math.random() * mapSize));
 		treasureList.add(t1);
-		
-		for (Treasure t: treasureList)
-		{
-			//System.out.println(t.name);
-		}
-		
+		createTreasure(3);
 		drawMaze();
-		//showPlayerPos();
+		
 		do
 		{
 			showMap();
@@ -38,6 +31,23 @@ public class Game
 		
 	}
 	
+	public static void drawMenu()
+	{
+		System.out.println("d8888b.  .d8b.  d8888b. d8888b. d88888b d8b   db      .88b  d88.  .d88b.   .d88b.  d8888b. d88888b ");
+		System.out.println("88  `8D d8' `8b 88  `8D 88  `8D 88'     888o  88      88'YbdP`88 .8P  Y8. .8P  Y8. 88  `8D 88'     ");
+		System.out.println("88oooY' 88ooo88 88oobY' 88oobY' 88ooooo 88V8o 88      88  88  88 88    88 88    88 88oobY' 88ooooo ");
+		System.out.println("88~~~b. 88~~~88 88`8b   88`8b   88~~~~~ 88 V8o88      88  88  88 88    88 88    88 88`8b   88~~~~~ ");
+		System.out.println("88   8D 88   88 88 `88. 88 `88. 88.     88  V888      88  88  88 `8b  d8' `8b  d8' 88 `88. 88.     ");
+		System.out.println("Y8888P' YP   YP 88   YD 88   YD Y88888P VP   V8P      YP  YP  YP  `Y88P'   `Y88P'  88   YD Y88888P \n");
+		System.out.println("You awaken to find yourself in a barren moor"
+						 + "\nGrey foggy clouds float oppressively close to you,"
+						 + "\nreflected in the murky grey water which reaches up your shins."
+						 + "\nSome black plants barely poke out of the shallow water."
+						 + "\nYou notice a small watch-like device in your left hand." 
+						 + "\nIt has hands like a watch, but the hands don't seem to tell time."
+						 + "\n\nTry \"north\",\"south\",\"east\",or \"west\"\n");
+		
+	}
 	
 	public static void showPlayerPos()
 	{
@@ -68,6 +78,38 @@ public class Game
 		}
 	}
 	
+//	public static void drawMaze()
+//	{	
+//		numTreasures = 1;
+//		mapSize = 10;
+//		mazeGrid = new int[mapSize][mapSize];
+//		for (int x = 0; x < mapSize; x++)
+//		{
+//			for (int y = 0; y < mapSize; y++)
+//			{
+//				mazeGrid[x][y] = 0;
+//			}
+//		}
+//		
+//		for (Treasure t: treasureList)
+//		{
+//		//Treasure currentTreasure = treasureList.get(0);
+//		boolean playerOnTreasure = false;
+//		do {
+//			playerOnTreasure = false;
+//			playerPos[0] = (int)Math.floor(Math.random() * mapSize);
+//			playerPos[1] = (int)Math.floor(Math.random() * mapSize);
+//			if ((playerPos[0] == t.xPos) && (playerPos[0] == t.xPos))
+//				playerOnTreasure = true;	
+//		} while (playerOnTreasure);
+//		
+//		
+//		mazeGrid[playerPos[0]][playerPos[1]] = -1;
+//		System.out.println("Treasure index: " + treasureList.indexOf(t));
+//		mazeGrid[t.xPos][t.yPos] = treasureList.indexOf(t);
+//		}
+//	}
+	
 	public static void drawMaze()
 	{	
 		numTreasures = 1;
@@ -81,6 +123,7 @@ public class Game
 			}
 		}
 		
+
 		Treasure currentTreasure = treasureList.get(0);
 		boolean playerOnTreasure = false;
 		do {
@@ -91,8 +134,20 @@ public class Game
 				playerOnTreasure = true;	
 		} while (playerOnTreasure);
 		
+		
 		mazeGrid[playerPos[0]][playerPos[1]] = -1;
+		//System.out.println("Treasure index: " + treasureList.indexOf(currentTreasure));
 		mazeGrid[currentTreasure.xPos][currentTreasure.yPos] = 1;
+		
+	}
+	
+	public static void createTreasure(int numberOfTreasures)
+	{
+		for (int i = 0; i < numberOfTreasures; i++)
+		{
+			treasureList.add(new Treasure((int)Math.floor(Math.random() * mapSize),
+	   				   					  (int)Math.floor(Math.random() * mapSize)));
+		}
 	}
 	
 	public static double locateTreasure()
@@ -128,9 +183,14 @@ public class Game
 			case "where am i":
 				showPlayerPos();
 				break;
+			case "cheat":
+				showTreasurePos();
+				break;
 			case "suicide":
 				numTreasures = 0;
 				System.out.println("You impale yourself on your own sword and die\nGAME OVER");
+				System.exit(0);
+				break;
 			default:
 				System.out.println("Not a valid command");
 		}
